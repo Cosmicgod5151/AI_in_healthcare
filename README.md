@@ -65,14 +65,12 @@ AI_in_healthcare/
 │   ├── requirements.txt                             # Pipeline-specific dependencies
 │   └── LICENSE                                      # MIT License
 │
-├── labs/                                            # CSET343 AI in Healthcare Coursework Labs
-│   ├── lab4_logistic_regression_breast_cancer.py    # Binary classification on breast cancer
-│   ├── lab5_multiclass_dermatology.py               # Multiclass classification on dermatology
-│   ├── lab6_chest_xray_cnn.py                       # Hybrid CNN + HOG/LBP/GLCM on chest X-rays
-│   ├── lab7_grid_search_pima.py                     # Keras DL hyperparameter grid search
-│   ├── README.md                                    # Comprehensive lab documentation & guides
-│   └── requirements.txt                             # Lab dependencies
-│
+├── lab4_logistic_regression_breast_cancer.py        # Lab 4: Binary classification on breast cancer
+├── lab5_multiclass_dermatology.py                   # Lab 5: Multiclass classification on dermatology
+├── lab6_chest_xray_cnn.py                           # Lab 6: Hybrid CNN + HOG/LBP/GLCM on chest X-rays
+├── lab6.py                                          # Lab 6: (Original filename alias)
+├── lab7_grid_search_pima.py                         # Lab 7: Keras DL hyperparameter grid search
+├── lab7.py                                          # Lab 7: (Original filename alias)
 ├── .gitignore                                       # Python, Jupyter, outputs, and OS exclusions
 ├── LICENSE                                          # Repository MIT License
 ├── README.md                                        # Master repository documentation
@@ -123,14 +121,14 @@ AI_in_healthcare/
 
 ---
 
-### [Coursework Labs: CSET343 AI in Healthcare](labs/)
+### Coursework Labs: CSET343 AI in Healthcare
 
-- **Focus**: Practical implementations of clinical diagnostic classifiers, deep learning architectures, and computer vision feature extractors.
-- **Labs**:
-  - **Lab 4**: Binary Logistic Regression classification on the Wisconsin Diagnostic Breast Cancer dataset (evaluating ROC-AUC and threshold optimization).
-  - **Lab 5**: Multiclass benchmark (Logistic Regression, k-NN, Random Forest, SVM, Decision Tree) on the 6-class UCI Dermatology dataset.
-  - **Lab 6**: Hybrid CNN and handcrafted computer vision feature fusion (HOG, LBP, GLCM) for pediatric Chest X-Ray pneumonia detection.
-  - **Lab 7**: Deep neural network architecture grid search tuning using SciKeras & TensorFlow on the Pima Indians Diabetes dataset.
+Practical standalone scripts implementing clinical diagnostic classifiers, deep learning architectures, and computer vision feature extractors:
+
+- **Lab 4 (`lab4_logistic_regression_breast_cancer.py`)**: Binary Logistic Regression classification on the Wisconsin Diagnostic Breast Cancer dataset (evaluating ROC-AUC and threshold optimization; outputs saved to `./lab4_outputs/`).
+- **Lab 5 (`lab5_multiclass_dermatology.py`)**: Multiclass benchmark (Logistic Regression, k-NN, Random Forest, SVM, Decision Tree) on the 6-class UCI Dermatology dataset (outputs saved to `./lab5_outputs/`).
+- **Lab 6 (`lab6_chest_xray_cnn.py` / `lab6.py`)**: Hybrid CNN and handcrafted computer vision feature fusion (HOG, LBP, GLCM) for pediatric Chest X-Ray pneumonia detection (outputs saved to `./lab6_outputs/`).
+- **Lab 7 (`lab7_grid_search_pima.py` / `lab7.py`)**: Deep neural network architecture grid search tuning using SciKeras & TensorFlow on the Pima Indians Diabetes dataset.
 
 ---
 
@@ -173,14 +171,7 @@ source venv/bin/activate
 ```
 
 ### 4. Install Dependencies
-To install all requirements across all pipelines and labs:
 ```bash
-pip install -r requirements.txt
-```
-
-Alternatively, install dependencies for an individual subfolder:
-```bash
-cd labs
 pip install -r requirements.txt
 ```
 
@@ -189,12 +180,12 @@ pip install -r requirements.txt
   ```bash
   jupyter notebook
   ```
-- **Execute a Lab Assignment**:
+- **Execute Lab Assignments Directly**:
   ```bash
-  python labs/lab4_logistic_regression_breast_cancer.py
-  python labs/lab5_multiclass_dermatology.py
-  python labs/lab6_chest_xray_cnn.py
-  python labs/lab7_grid_search_pima.py
+  python lab4_logistic_regression_breast_cancer.py
+  python lab5_multiclass_dermatology.py
+  python lab6_chest_xray_cnn.py
+  python lab7_grid_search_pima.py
   ```
 
 ---
