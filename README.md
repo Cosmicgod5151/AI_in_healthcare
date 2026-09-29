@@ -5,7 +5,7 @@
 [![Jupyter](https://img.shields.io/badge/Jupyter-Lab%20%2F%20Notebook-orange.svg)](https://jupyter.org/)
 [![Domains](https://img.shields.io/badge/Healthcare%20AI-Tabular%20%7C%20ECG%20%7C%20NLP%20%7C%20Imaging-brightgreen.svg)](#-multimodal-architecture)
 
-An end-to-end, production-oriented repository of **Healthcare Artificial Intelligence and Data Engineering Pipelines**. This repository demonstrates rigorous data acquisition, cleaning, preprocessing, feature engineering, and baseline machine learning workflows across four foundational medical modalities:
+An end-to-end, production-oriented repository of **Healthcare Artificial Intelligence and Data Engineering Pipelines**. This repository demonstrates rigorous data acquisition, cleaning, preprocessing, feature engineering, baseline machine learning, and deep learning workflows across four foundational medical modalities:
 
 - 📊 **Structured Clinical Records** (Tabular lab metrics, vitals, electronic health records)
 - 🫀 **Physiological Time-Series Signals** (Ambulatory ECG, WFDB annotations, Heart Rate Variability)
@@ -19,7 +19,7 @@ An end-to-end, production-oriented repository of **Healthcare Artificial Intelli
 ```mermaid
 flowchart TD
     subgraph Data_Modalities["Raw Healthcare Modalities"]
-        A["Tabular EHR & Labs<br/>(Heart Failure, Pima, Cleveland)"]
+        A["Tabular EHR & Labs<br/>(Heart Failure, Pima, Cleveland, Breast Cancer, Dermatology)"]
         B["Physiological Signals<br/>(MIT-BIH Ambulatory ECG)"]
         C["Clinical Text<br/>(Doctor Notes & Narratives)"]
         D["Medical Imaging<br/>(Chest X-Rays / DICOM)"]
@@ -29,14 +29,15 @@ flowchart TD
         A --> E["Implausible Zero Remediation<br/>Skew-Aware Imputation<br/>IQR Outlier Pruning<br/>Clinical Ratio Engineering"]
         B --> F["WFDB Signal Ingestion<br/>Butterworth Bandpass Filter<br/>R-Peak Alignment & HRV Analysis"]
         C --> G["Automated PHI De-identification<br/>Clinical Tokenization & Stopwords<br/>TF-IDF Term Extraction"]
-        D --> H["Metadata Anonymization<br/>Gaussian Spatial Blurring<br/>CLAHE Contrast Optimization"]
+        D --> H["Metadata Anonymization<br/>Gaussian Spatial Blurring<br/>CLAHE Contrast Optimization<br/>HOG / LBP / GLCM Texture Descriptors"]
     end
 
     subgraph Modeling_Layer["Machine Learning & Clinical Insights"]
-        E --> I["Risk Classification & Feature Importance<br/>(Logistic Regression, Random Forest, ANOVA)"]
-        F --> J["Cardiac Arrhythmia & RMSSD Metric Profiling"]
-        G --> K["Clinical Concept Frequency Matrix"]
-        H --> L["Standardized Tensor Representations (224x224)"]
+        E --> I["Risk Classification & Feature Importance<br/>(Logistic Regression, Random Forest, SVM, ANOVA)"]
+        B --> J["Cardiac Arrhythmia & RMSSD Metric Profiling"]
+        C --> K["Clinical Concept Frequency Matrix"]
+        D --> L["Convolutional Neural Networks & Texture Fusion"]
+        E --> M["Deep Learning Grid Search Optimization<br/>(SciKeras & TensorFlow)"]
     end
 ```
 
@@ -64,7 +65,15 @@ AI_in_healthcare/
 │   ├── requirements.txt                             # Pipeline-specific dependencies
 │   └── LICENSE                                      # MIT License
 │
-├── .gitignore                                       # Python, Jupyter, and OS exclusion rules
+├── labs/                                            # CSET343 AI in Healthcare Coursework Labs
+│   ├── lab4_logistic_regression_breast_cancer.py    # Binary classification on breast cancer
+│   ├── lab5_multiclass_dermatology.py               # Multiclass classification on dermatology
+│   ├── lab6_chest_xray_cnn.py                       # Hybrid CNN + HOG/LBP/GLCM on chest X-rays
+│   ├── lab7_grid_search_pima.py                     # Keras DL hyperparameter grid search
+│   ├── README.md                                    # Comprehensive lab documentation & guides
+│   └── requirements.txt                             # Lab dependencies
+│
+├── .gitignore                                       # Python, Jupyter, outputs, and OS exclusions
 ├── LICENSE                                          # Repository MIT License
 ├── README.md                                        # Master repository documentation
 └── requirements.txt                                 # Unified environment dependencies
@@ -72,7 +81,7 @@ AI_in_healthcare/
 
 ---
 
-## 🔬 Project Modules Overview
+## 🔬 Project Modules & Labs Overview
 
 ### [Module 1: Clinical Data Cleaning & Enrichment — Heart Failure](01-clinical-data-cleaning-heart-failure/)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Cosmicgod5151/AI_in_healthcare/blob/main/01-clinical-data-cleaning-heart-failure/clinical_data_cleaning_heart_failure.ipynb)
@@ -114,14 +123,26 @@ AI_in_healthcare/
 
 ---
 
+### [Coursework Labs: CSET343 AI in Healthcare](labs/)
+
+- **Focus**: Practical implementations of clinical diagnostic classifiers, deep learning architectures, and computer vision feature extractors.
+- **Labs**:
+  - **Lab 4**: Binary Logistic Regression classification on the Wisconsin Diagnostic Breast Cancer dataset (evaluating ROC-AUC and threshold optimization).
+  - **Lab 5**: Multiclass benchmark (Logistic Regression, k-NN, Random Forest, SVM, Decision Tree) on the 6-class UCI Dermatology dataset.
+  - **Lab 6**: Hybrid CNN and handcrafted computer vision feature fusion (HOG, LBP, GLCM) for pediatric Chest X-Ray pneumonia detection.
+  - **Lab 7**: Deep neural network architecture grid search tuning using SciKeras & TensorFlow on the Pima Indians Diabetes dataset.
+
+---
+
 ## 🛠 Tech Stack
 
 | Category | Libraries & Tools |
 | :--- | :--- |
 | **Core & Analysis** | `pandas`, `numpy`, `scipy` |
 | **Machine Learning & Stats** | `scikit-learn` |
+| **Deep Learning & Neural Networks** | `tensorflow`, `scikeras` |
 | **Biomedical Signals** | `wfdb` (PhysioNet Waveform Database) |
-| **Computer Vision / Medical Imaging** | `opencv-python`, `Pillow` (PIL) |
+| **Computer Vision & Medical Imaging** | `opencv-python`, `Pillow` (PIL), `scikit-image` |
 | **Clinical NLP** | `nltk` |
 | **Visualization** | `matplotlib`, `seaborn` |
 | **Interactive Environments** | `JupyterLab`, `Jupyter Notebook`, `Google Colab` |
@@ -152,22 +173,29 @@ source venv/bin/activate
 ```
 
 ### 4. Install Dependencies
-To install all requirements for all modules:
+To install all requirements across all pipelines and labs:
 ```bash
 pip install -r requirements.txt
 ```
 
-Alternatively, you can install dependencies for an individual module by navigating into its directory:
+Alternatively, install dependencies for an individual subfolder:
 ```bash
-cd 01-clinical-data-cleaning-heart-failure
+cd labs
 pip install -r requirements.txt
 ```
 
-### 5. Launch Jupyter Notebooks
-```bash
-jupyter notebook
-```
-Navigate to any of the module folders and open the corresponding `.ipynb` file to run the interactive pipeline.
+### 5. Launch Interactive Notebooks or Run Lab Scripts
+- **Launch Jupyter Notebooks**:
+  ```bash
+  jupyter notebook
+  ```
+- **Execute a Lab Assignment**:
+  ```bash
+  python labs/lab4_logistic_regression_breast_cancer.py
+  python labs/lab5_multiclass_dermatology.py
+  python labs/lab6_chest_xray_cnn.py
+  python labs/lab7_grid_search_pima.py
+  ```
 
 ---
 
@@ -177,6 +205,9 @@ Navigate to any of the module folders and open the corresponding `.ipynb` file t
 2. **Cleveland Heart Disease Dataset**: [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/heart+disease) (*Janosi, Steinbrunn, Pfisterer, Detrano*).
 3. **Pima Indians Diabetes Dataset**: National Institute of Diabetes and Digestive and Kidney Diseases (*Smith et al., 1988*).
 4. **MIT-BIH Arrhythmia Database**: [PhysioNet](https://physionet.org/content/mitdb/1.0.0/) (*Moody & Mark, 2001*).
+5. **Wisconsin Diagnostic Breast Cancer**: [UCI ML Repository / Scikit-Learn](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_breast_cancer.html) (*Street, Wolberg, Mangasarian*).
+6. **Dermatology Dataset**: [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/dermatology) (*Guvenir et al.*).
+7. **Chest X-Ray Images (Pneumonia)**: [Kaggle](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia) (*Paul Mooney, Kermany et al.*).
 
 ---
 

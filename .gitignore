@@ -48,6 +48,12 @@ venv.bak/
 *.feather
 *.log
 
+# Lab outputs and datasets
+lab4_outputs/
+lab5_outputs/
+lab6_outputs/
+chest_xray/
+
 # OS generated files
 .DS_Store
 .DS_Store?
